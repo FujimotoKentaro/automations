@@ -39,3 +39,4 @@ if __name__ == '__main__': # おまじない
         list = search_from_commits(commit_list, "FujimotoKentaro", 1)
         slice_commit(list)
         
+        
