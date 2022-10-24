@@ -61,17 +61,19 @@ def get_commits_from_path(repo_path):
 
 
 def execute(git_repo_path):
-    for path in git_repo_path:
+    for repo_data in git_repo_path:
+        path = repo_data[0]
+        repo_type = repo_data[1]
         commit_list = get_commits_from_path(path)
         my_commits = search_from_commits(commit_list, "Fujimoto Kentaro", 1)
         commit_number_list = slice_commit(my_commits)
-        text = formatter(commit_number_list)
+        text = formatter(commit_number_list, repo_type)
 
         with open('write_test.txt','w') as f:
             f.write(text)
 
 
 if __name__ == '__main__': # おまじない
-    git_repo_paths = ['..']
+    git_repo_paths = [('..', RepoType.RECOVERY)]
     execute(git_repo_paths)
     
