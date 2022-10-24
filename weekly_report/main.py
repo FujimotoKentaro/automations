@@ -4,10 +4,20 @@ from git import *    #git.~で使用する必要がないようにgit 以下をi
 
 # search_from_commits(made_list, "Fujisan", 144)
 def search_from_commits(commit_list, author_name, project_number):
+    list = []
     for commit in commit_list:
         if commit.author.name == author_name:
-            print (commit.author, commit.message)
+            # print (commit.author, commit.message)
+            list.append(commit.message)
+    return list
 
+def slice_commit(list):
+    for commit in list :
+        s = commit
+        target = '_'
+        idx = s.find(target)
+        r = s[:idx]
+        print(r)
 
 # input: repository url
 # output: all commit (restricted commit)
@@ -20,11 +30,12 @@ def get_commits_from_path(repo_path):
     #     print(item.author, item)
 
     return repo.iter_commits('main')
-    
-if __name__ == '__main__': # おまじない
 
+
+if __name__ == '__main__': # おまじない
     git_repo_paths = ['..']
     for path in git_repo_paths:
         commit_list = get_commits_from_path(path)
-        search_from_commits(commit_list, "FujimotoKentaro", 1)
+        list = search_from_commits(commit_list, "FujimotoKentaro", 1)
+        slice_commit(list)
         
