@@ -27,20 +27,25 @@ def slice_commit(my_commits):
         if id_number[:2] == 'No':
             commit_number_list.append(id_number)
 
-    print(commit_number_list)
+    # print(commit_number_list)
     return commit_number_list
 
 
 def formatter(commit_number_list, repo_type = RepoType.RECOVERY):
-    for a in commit_number_list:
+    ret_string = ""
+    for commit_number in commit_number_list:
         if repo_type == RepoType.RECOVERY:
-            a = a + 'のリカバリー'
-            print(a)
+            text = commit_number + 'のリカバリー'
+            ret_string += text +'\n'
         elif repo_type == RepoType.CREATE_TEXT:
-            a = a + 'のテキスト作成'
-            print(a)
+            text = commit_number + 'のテキスト作成'
+            ret_string += text +'\n'
         else:
-            print('登録されていないリポジトリ')
+            ret_string += '登録されていないリポジトリ\n'
+
+    # print(repo_type)
+    # print(ret_string)
+    return ret_string        
 
 # input: repository url
 # output: all commit (restricted commit)
@@ -55,15 +60,18 @@ def get_commits_from_path(repo_path):
     return repo.iter_commits('main')
 
 
-if __name__ == '__main__': # おまじない
-    git_repo_paths = ['..']
-    for path in git_repo_paths:
+def execute(git_repo_path):
+    for path in git_repo_path:
         commit_list = get_commits_from_path(path)
         my_commits = search_from_commits(commit_list, "Fujimoto Kentaro", 1)
         commit_number_list = slice_commit(my_commits)
-        formatter(commit_number_list)
-        formatter(commit_number_list, RepoType.CREATE_TEXT)
-        formatter(commit_number_list, 123)
-        
+        text = formatter(commit_number_list)
 
-        
+        with open('write_test.txt','w') as f:
+            f.write(text)
+
+
+if __name__ == '__main__': # おまじない
+    git_repo_paths = ['..']
+    execute(git_repo_paths)
+    
