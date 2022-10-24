@@ -76,4 +76,4 @@ def execute(git_repo_path):
 if __name__ == '__main__': # おまじない
     git_repo_paths = [('..', RepoType.RECOVERY)]
     execute(git_repo_paths)
-    
+    # datetime
