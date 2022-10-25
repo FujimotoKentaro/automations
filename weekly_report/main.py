@@ -1,17 +1,34 @@
 from git import *    #git.~で使用する必要がないようにgit 以下をimport
 # url = 'https://gitlab.tokyo.optim.co.jp/optim-store/tools/optim_store_recovery'
 # url = 'https://gitlab.tokyo.optim.co.jp/optim-store/tools/bpcc-text-checker'
-
+import datetime
+import sys
 from enum import Enum
+
+
 class RepoType(Enum):
     RECOVERY = 1
     CREATE_TEXT = 2
 
+
+def get_oneweek_before():
+    today = datetime.datetime.now(tz = datetime.timezone(datetime.timedelta(hours=9)))
+    six_days = datetime.timedelta(days = 6) # 土曜日
+    prev_saturday = today - six_days
+
+    return prev_saturday
+
+
 # search_from_commits(made_list, "Fujisan", 144)
-def search_from_commits(commit_list, author_name, project_number):
+def search_from_commits(commit_list, author_name):
     my_commits = []
     for commit in commit_list:
-        if commit.author.name == author_name:
+        # print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        # print(commit.committed_datetime.tzname())
+        # print(commit.committer_tz_offset)
+        # print('----end-----')
+        # print(get_oneweek_before(), commit.committed_datetime, get_oneweek_before() <= commit.committed_datetime)
+        if commit.author.name == author_name and get_oneweek_before() <= commit.committed_datetime:
             # print (commit.author, commit.message)
             my_commits.append(commit.message)
     return my_commits
@@ -45,6 +62,7 @@ def formatter(commit_number_list, repo_type = RepoType.RECOVERY):
 
     # print(repo_type)
     # print(ret_string)
+    print(ret_string, file=sys.stderr)
     return ret_string        
 
 # input: repository url
