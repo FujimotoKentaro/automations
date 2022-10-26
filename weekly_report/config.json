@@ -1,0 +1,7 @@
+{
+  "author": "kentaro.fujimoto",
+  "repository": [
+    { "path": "/Users/opm005789/optim_store_recovery", "type": "Recovery" },
+    { "path": "/Users/opm005789/bpcc-text-checker", "type": "Create_text" }
+  ]
+}
