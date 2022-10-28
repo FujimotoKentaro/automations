@@ -1,11 +1,9 @@
 from git import *  # git.~で使用する必要がないようにgit 以下をimport
 import datetime
-import sys
 from enum import Enum
 from logging import getLogger
 from setlogger import set_logger
 
-sys.path.append("..")
 set_logger()
 logger = getLogger(__name__)
 
@@ -144,11 +142,12 @@ if __name__ == "__main__":  # おまじない
     logger.info("Proccess start")
     import json
 
-    with open("test_config.json", "r") as json_file:
+    with open("config.json", "r") as json_file:
         config_dict = json.load(json_file)
         author = config_dict["author"]
         git_repo_path = config_dict["repository"]
         # print(config_dict)
 
     execute(git_repo_path, author)
+    logger.info("Proccess end")
     # datetime
