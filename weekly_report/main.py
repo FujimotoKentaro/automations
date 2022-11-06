@@ -1,6 +1,4 @@
 from git import *    #git.~で使用する必要がないようにgit 以下をimport
-# url = 'https://gitlab.tokyo.optim.co.jp/optim-store/tools/optim_store_recovery'
-# url = 'https://gitlab.tokyo.optim.co.jp/optim-store/tools/bpcc-text-checker'
 import datetime
 import sys
 from enum import Enum
