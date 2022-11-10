@@ -3,3 +3,4 @@ __pycache__/
 chromedriver
 *.swp
 .vscode
+.DS_Store
